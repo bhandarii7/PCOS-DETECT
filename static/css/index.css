@@ -1,0 +1,26 @@
+#heading{
+    margin-top: 5rem;
+    text-align: center;
+}
+
+#crousel-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#main-part{
+    text-align: center;
+    margin-top: 5rem;
+}
+
+#btn-predict{
+    margin-top: 5rem;
+}
+
+#result{
+    margin-top: 5rem;
+}
+
+
+

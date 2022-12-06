@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Init
-    $('.image-section').hide();
+    $('.result-section').hide();
     $('.loader').hide();
     $('#result').hide();
 
@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
     }
     $("#imageUpload").change(function () {
-        $('.image-section').show();
+        $('.result-section').show();
         $('#btn-predict').show();
         $('#result').text('');
         $('#result').hide();
@@ -52,3 +52,14 @@ $(document).ready(function () {
     });
 
 });
+
+//about us
+
+baseUrl = 'http://127.0.0.1:5000/'
+
+$('#aboutus').click(function () {
+    
+    window.location.href = baseUrl+'aboutus';
+    
+});
+

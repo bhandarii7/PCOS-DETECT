@@ -22,20 +22,18 @@ from gevent.pywsgi import WSGIServer
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH = './model/model1.h5'
+MODEL_PATH = './model/model_f.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH)
-# model._make_predict_function()          # Necessary
-# print('Model loaded. Start serving...')
 
 print('Model loaded. Check http://127.0.0.1:5000/')
 
-def get_key(val,l):
-    for key, value in l.items():
-        if val == value:
-            return key
-    return "key doesn't exist"
+def get_key(val):
+    if(val == 0):
+      return "Infected"
+    else:
+      return "Not Infected"
 
 
 def model_predict(img_path, model):
@@ -45,18 +43,7 @@ def model_predict(img_path, model):
     ,interpolation='nearest'
     ,keep_aspect_ratio=False)
 
-    # Preprocessing the image
-    # x = image.img_to_array(img)
     x = np.array(img)
-    # x = np.true_divide(x, 255)
-    # x = np.expand_dims(x, axis=0)
-
-    # Be careful how your trained model deals with the input
-    # otherwise, it won't make correct prediction!
-    # x = preprocess_input(x, mode='caffe')
-
-    # preds = model.predict(x)
-
     x = x/255.0
     x = x.reshape(1,224,224,3)
     preds = model.predict(x)
@@ -67,6 +54,17 @@ def model_predict(img_path, model):
 def index():
     # Main page
     return render_template('./index.html')
+
+
+@app.route('/aboutus', methods=['GET'])
+def aboutus():
+    # about us page
+    return render_template('./about.html')
+
+@app.route('/contactus', methods=['GET'])
+def contactus():
+    # contactus page
+    return render_template('./contact.html')
 
 
 @app.route('/predict', methods=['GET', 'POST'])
@@ -85,12 +83,16 @@ def upload():
         preds = model_predict(file_path, model)
 
 
-        j = preds.max()
+        # j = preds.max()
 
-        l={"infected":preds[0][0],"not infected":preds[0][1]}
+        # l={"infected":preds[0][0],"not infected":preds[0][1]}
 
-        ans = get_key(j,l)
+        # temp = preds[0][0]
+        y_class = ((preds > 0.5)+0).ravel()
 
+        ans = get_key(y_class)
+
+        
         return ans
         
       

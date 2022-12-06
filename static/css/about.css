@@ -1,0 +1,38 @@
+
+h1{
+    text-align: center;
+    margin: 3rem;
+    padding: 3rem;
+}
+
+.container-name{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+img{
+    height: 350px;
+    width: 300px;
+}
+
+h4{
+    text-align: center;
+    padding: 1rem 0;
+}
+
+#contact-us{
+    display:block;
+    background-color: aquamarine;
+    text-align: center;
+    margin: auto;
+    border: none;
+    padding: 1rem;
+    font-size: large;
+    border-radius: 1rem;
+
+}
+
+#contact-us:hover{
+    cursor: pointer;
+}
